@@ -124,23 +124,12 @@ map <leader>a :A<CR>
 
 " OmniCppComplete
 
-function! SuperCleverTab()
-	if strpart(getline('.'), 0, col('.') - 1) =~ '^\s*$'
-		return "\<Tab>"
-	else
-		if &omnifunc != ''
-			return "\<C-X>\<C-O>"
-		elseif &dictionary != ''
-			return "\<C-K>"
-		else
-			return "\<C-N>"
-		endif
-	endif
-endfunction
+let g:SuperTabDefaultCompletionType = "context"
 
-inoremap <Tab> <C-R>=SuperCleverTab()<cr>
-
-highlight PmenuSel ctermbg=Blue
+highlight   Pmenu         ctermfg=0 ctermbg=2
+highlight   PmenuSel      ctermfg=0 ctermbg=7
+highlight   PmenuSbar     ctermfg=7 ctermbg=0
+highlight   PmenuThumb    ctermfg=0 ctermbg=7
 
 " automatically open and close the popup menu / preview window 
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
