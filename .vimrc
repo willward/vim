@@ -1,4 +1,4 @@
-set guifont=courier_new:h10
+set guifont=courier_new:h8
 colorscheme desert
 
 set statusline=[%n]\ %0.30t%m%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
@@ -77,13 +77,15 @@ nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 set complete-=i
 set path=**
 
-map <F5> :execute "vimgrep /" . expand("<cword>") . "/j **/*.cpp" <Bar> cw<CR>
+nnoremap <F4> :buffers<CR>:buffer<Space>
+map <F5> :execute "noautocmd vimgrep /" . expand("<cword>") . "/j **/*.cpp" <Bar> cw<CR>
 map <F6> :VCSVimDiff<CR>
 map <F7> :q<CR>:bn<CR>
 
-nmap <silent> <C-n> :BufSurfBack<CR>
-nmap <silent> <C-m> :BufSurfForward<CR>
+nmap <silent> <A-Up> :wincmd k<CR>
+nmap <silent> <A-Down> :wincmd j<CR>
+nmap <silent> <A-Left> :wincmd h<CR>
+nmap <silent> <A-Right> :wincmd l<CR>
 
-
-
+set wildmenu
 
