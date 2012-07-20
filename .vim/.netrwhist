@@ -1,9 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/home/wilward/sipCC/nativeapp/sipcc/core/ccapp'
-let g:netrw_dirhist_2='/home/wilward/sipCC/nativeapp/sipcc/obj-android'
-let g:netrw_dirhist_3='/cygdrive/c/users/wilward.CISCO'
-let g:netrw_dirhist_4='/cygdrive/c/csf2g/ucm-config-trunk'
-let g:netrw_dirhist_5='/cygdrive/c/csf2g/ucm-config-trunk/src'
-let g:netrw_dirhist_6='/cygdrive/c/csf2g/ucm-config-trunk/src/uds'
-let g:netrw_dirhist_7='/cygdrive/c/csf2g/ucm-config-trunk'

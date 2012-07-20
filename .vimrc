@@ -1,91 +1,149 @@
-set guifont=courier_new:h8
-colorscheme desert
+" This must be first, because it changes other options as side effect
+set nocompatible
 
-set statusline=[%n]\ %0.30t%m%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+" Use pathogen to easily modify the runtime path to include all
+" plugins under the ~/.vim/bundle directory
+call pathogen#helptags()
+call pathogen#runtime_append_all_bundles()
+
+set statusline=[%n]\ %0.30t%m%h%w\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
 set laststatus=2
-set ignorecase
-set infercase
-set smartcase
-set mouse=n
-map <F10> :set invnumber<CR>
 
-syntax on
-filetype on
-filetype indent on
-au BufNewFile,BufRead SCons* set filetype=python
+" change the mapleader from \ to ,
+let mapleader=","
 
-set expandtab
-set shiftwidth=3
-set softtabstop=3
+" Quickly edit/reload the vimrc file
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
+set hidden
+
+set nowrap        " don't wrap lines
+set tabstop=4     " a tab is four spaces
 set backspace=indent,eol,start
-set tags=tags
-set notimeout
-set nottimeout
+                  " allow backspacing over everything in insert mode
+set autoindent    " always set autoindenting on
+set copyindent    " copy the previous indentation on autoindenting
+set number        " always show line numbers
+set shiftwidth=4  " number of spaces to use for autoindenting
+set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
+set showmatch     " set show matching parenthesis
+set ignorecase    " ignore case when searching
+set smartcase     " ignore case if search pattern is all lowercase,
+                  "    case-sensitive otherwise
+set smarttab      " insert tabs on the start of a line according to
+                  "    shiftwidth, not tabstop
+set hlsearch      " highlight search terms
+set incsearch     " show search matches as you type
 
-highlight   Pmenu         ctermfg=0 ctermbg=2
-highlight   PmenuSel      ctermfg=0 ctermbg=7
-highlight   PmenuSbar     ctermfg=7 ctermbg=0
-highlight   PmenuThumb    ctermfg=0 ctermbg=7
 
-" Press F7 to toggle highlighting on/off, and show current value.
-map <F8> :set hlsearch! hlsearch?<CR>
-set hlsearch
+set history=1000         " remember more commands and search history
+set undolevels=1000      " use many muchos levels of undo
+set wildignore+=*.swp,*.bak,*.pyc,*.class
+set title                " change the terminal's title
+set visualbell           " don't beep
+set noerrorbells         " don't beep
+
+set nobackup
+set noswapfile
+
+set wildmenu
 
 set number
 set numberwidth=5
+map <F10> :set invnumber<CR>
+
+filetype plugin indent on
+
+colorscheme evening
+syntax on
 
 set pastetoggle=<F3>
-map <F2> :NERDTreeToggle<CR>
-map ,a :A<CR>
-map <F9> :TlistToggle<CR>
 
-let Tlist_Exit_OnlyWindow = 1
-let Tlist_Show_One_File = 1
-let Tlist_Enable_Fold_Column = 0
-let Tlist_Use_Right_Window = 1
+set mouse=a
+
+nnoremap <F11> :call ToggleMouse()<CR>
+
+fun! ToggleMouse()
+    if !exists("s:old_mouse")
+        let s:old_mouse = "a"
+    endif
+
+    if &mouse == ""
+        let &mouse = s:old_mouse
+        echo "Mouse is for Vim (" . &mouse . ")"
+    else
+        let s:old_mouse = &mouse
+        let &mouse=""
+        echo "Mouse is for terminal"
+    endif
+endfunction
 
 
-" Fix Double ESC issue
-let &t_ti.="\e[?7727h"
-let &t_te.="\e[?7727l"
-noremap <Esc>O[ <Esc>
-noremap! <Esc>O[ <C-c>
+inoremap jj <ESC>
 
-" OmniCppComplete
-filetype plugin on
-set nocp
-
-let OmniCpp_NamespaceSearch = 1
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_ShowAccess = 1
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-let OmniCpp_MayCompleteDot = 0 " autocomplete after .
-let OmniCpp_MayCompleteArrow = 0 " autocomplete after ->
-let OmniCpp_MayCompleteScope = 0 " autocomplete after ::
-let OmniCpp_DefaultNamespaces = ["std"]
-
-" automatically open and close the popup menu / preview window
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-set completeopt=menuone,menu,longest,preview
+au BufNewFile,BufRead SCons* set filetype=python
 
 " -- ctags --
 " map F12 to generate ctags for current folder:
-map <F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+fq .<CR><CR>
+map <F12> :!ctags -R -V --c++-kinds=+p --fields=+iaS --extra=+q --exclude=dependencies --exclude=out --exclude=external --exclude=docs .<CR><CR>
+set tags=tags
 
-nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 
-set complete-=i
-set path=**
+nnoremap ; :
 
-nnoremap <F4> :buffers<CR>:buffer<Space>
-map <F5> :execute "noautocmd vimgrep /" . expand("<cword>") . "/j **/*.cpp" <Bar> cw<CR>
-map <F6> :VCSVimDiff<CR>
-map <F7> :q<CR>:bn<CR>
+" Use Q for formatting the current paragraph (or selection)
+vmap Q gq
+nmap Q gqap
 
-nmap <silent> <A-Up> :wincmd k<CR>
-nmap <silent> <A-Down> :wincmd j<CR>
-nmap <silent> <A-Left> :wincmd h<CR>
-nmap <silent> <A-Right> :wincmd l<CR>
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
 
-set wildmenu
+nnoremap j gj
+nnoremap k gk
+
+" Easy window navigation
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+nmap <silent> <leader>/ :nohlsearch<CR>
+
+" plugins
+" 
+" CTRL-P
+let g:ctrlp_custom_ignore = 'dependencies\|out\|external\|docs\|.svn\|*.tmp\|*.svn'
+let g:ctrlp_working_path_mode = 0
+
+
+" A.vim
+map <leader>a :A<CR>
+
+" OmniCppComplete
+
+function! SuperCleverTab()
+	if strpart(getline('.'), 0, col('.') - 1) =~ '^\s*$'
+		return "\<Tab>"
+	else
+		if &omnifunc != ''
+			return "\<C-X>\<C-O>"
+		elseif &dictionary != ''
+			return "\<C-K>"
+		else
+			return "\<C-N>"
+		endif
+	endif
+endfunction
+
+inoremap <Tab> <C-R>=SuperCleverTab()<cr>
+
+highlight PmenuSel ctermbg=Blue
+
+" automatically open and close the popup menu / preview window 
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+
+let OmniCpp_MayCompleteScope = 1 
 
