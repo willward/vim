@@ -33,6 +33,7 @@ set smartcase     " ignore case if search pattern is all lowercase,
                   "    case-sensitive otherwise
 set smarttab      " insert tabs on the start of a line according to
                   "    shiftwidth, not tabstop
+set expandtab
 set hlsearch      " highlight search terms
 set incsearch     " show search matches as you type
 
@@ -135,4 +136,10 @@ highlight   PmenuThumb    ctermfg=0 ctermbg=7
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
 let OmniCpp_MayCompleteScope = 1 
+
+" Nerdtree
+map <F2> :NERDTreeToggle<CR>
+let NERDTreeDirArrows=0
+let NERDTreeMouseMode=1
+
 
