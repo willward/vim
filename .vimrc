@@ -93,15 +93,6 @@ set tags=tags
 
 nnoremap ; :
 
-" Use Q for formatting the current paragraph (or selection)
-vmap Q gq
-nmap Q gqap
-
-map <up> <nop>
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
-
 nnoremap j gj
 nnoremap k gk
 
@@ -110,6 +101,11 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+
+nmap <C-up> <C-w>k
+nmap <C-down> <C-w>j
+nmap <C-left> <C-w>h
+nmap <C-right> <C-w>l
 
 nmap <silent> <leader>/ :nohlsearch<CR>
 
