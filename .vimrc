@@ -61,7 +61,10 @@ syntax on
 
 set pastetoggle=<F3>
 
-set mouse=a
+"set mouse=a
+
+set cursorline
+hi CursorLine cterm=NONE ctermbg=DarkBlue  guibg=DarkBlue
 
 nnoremap <F11> :call ToggleMouse()<CR>
 
@@ -137,5 +140,20 @@ let OmniCpp_MayCompleteScope = 1
 map <F2> :NERDTreeToggle<CR>
 let NERDTreeDirArrows=0
 let NERDTreeMouseMode=1
+
+map <F5> :execute "vimgrep /" . expand("<cword>") . "/j **/*.cpp" <Bar> cw<CR>
+
+
+map <F9> :TlistToggle<CR>
+
+let Tlist_Exit_OnlyWindow = 1
+let Tlist_Show_One_File = 1
+let Tlist_Enable_Fold_Column = 0
+let Tlist_Use_Right_Window = 1
+
+set makeprg=/cygdrive/c/Python27/Scripts/scons.bat
+
+" filename(line) : error|warning|fatal error C0000: message
+set errorformat=\ %#%f(%l)\ :\ %#%t%[A-z]%#\ %[A-Z\ ]%#%n:\ %m,%f(%l):\ %#%t%[A-z]%#:\ %m
 
 
