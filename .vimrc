@@ -90,7 +90,7 @@ au BufNewFile,BufRead SCons* set filetype=python
 
 " -- ctags --
 " map F12 to generate ctags for current folder:
-map <F12> :!ctags -R -V --c++-kinds=+p --fields=+iaS --extra=+q --exclude=dependencies --exclude=out --exclude=external --exclude=docs .<CR><CR>
+map <F12> :!ctags -R -V --c++-kinds=+p --fields=+iaS --extra=+fq --exclude=dependencies --exclude=out --exclude=external --exclude=docs . /usr/include/*.h <CR><CR>
 set tags=tags
 
 
@@ -123,8 +123,6 @@ let g:ctrlp_working_path_mode = 0
 map <leader>a :A<CR>
 
 " OmniCppComplete
-
-let g:SuperTabDefaultCompletionType = "context"
 
 highlight   Pmenu         ctermfg=0 ctermbg=2
 highlight   PmenuSel      ctermfg=0 ctermbg=7
