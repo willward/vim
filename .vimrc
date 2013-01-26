@@ -90,7 +90,7 @@ au BufNewFile,BufRead SCons* set filetype=python
 
 " -- ctags --
 " map F12 to generate ctags for current folder:
-map <F12> :!ctags -R -V --c++-kinds=+p --fields=+iaS --extra=+fq --exclude=dependencies --exclude=out --exclude=external --exclude=docs . /usr/include/*.h <CR><CR>
+map <F12> :!ctags -R -V --c++-kinds=+p --fields=+iaS --extra=+fq --exclude=dependencies --exclude=out --exclude=external --exclude=docs . <CR><CR>
 set tags=tags
 
 
